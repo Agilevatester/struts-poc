@@ -39,6 +39,14 @@
              <result name="success">upload.jsp</result>
                <result name="error">upload.jsp</result>
         </action>
+        
+          <action name="multiupload" class="org.apache.struts.example.MultiUploadAction" method="upload">
+            <result name="VIEW">multiupload.jsp</result>
+             <result name="success">multiupload.jsp</result>
+               <result name="error">multiupload.jsp</result>
+        </action>
   </package>
+  
+  
     <!-- Add addition packages and configuration here. -->
 </struts>

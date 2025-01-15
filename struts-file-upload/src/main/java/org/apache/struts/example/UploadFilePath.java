@@ -1,19 +1,42 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
 package org.apache.struts.example;
 
+//import org.apache.struts2.ActionSupport;
 import com.opensymphony.xwork2.ActionSupport;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
-public class UploadAction extends ActionSupport {
+/**
+ * <code>Allows upload a file</code>
+ */
+public class UploadFilePath extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
 
 	// private String Local
 	private File upload;
 	private String uploadContentType;
-//	private String fileName;
-	private String uploadFileName;
+	private String fileName;
 
 	public File getUpload() {
 		return upload;
@@ -31,11 +54,7 @@ public class UploadAction extends ActionSupport {
 		this.uploadContentType = uploadContentType;
 	}
 
-	
-	  public String getUploadFileName() { return uploadFileName; }
-	  
-	  public void setUploadFileName(String uploadFileName) { this.uploadFileName =
-	  uploadFileName; }
+
 	 
 
 	public String view() throws Exception {
@@ -48,8 +67,7 @@ public class UploadAction extends ActionSupport {
 		if (upload != null && upload.length() > 0) {
 			try {
 
-				System.out.println(		" upload Method called ## upload!=null ---" + upload + "   uploadFileName : " + uploadFileName);
-//				System.out.println(	" upload Method called ## upload!=null ---" + upload + " uploadFileName : " + fileName);
+				System.out.println(	" upload Method called ## upload!=null ---" + upload + " uploadFileName : " + fileName);
 				String uploadDir = "c:\\tmp\\uploads";
 				File uploadDirectory = new File(uploadDir);
 
@@ -57,8 +75,7 @@ public class UploadAction extends ActionSupport {
 					uploadDirectory.mkdir();
 				}
 
-				File destFile = new File(uploadDirectory, uploadFileName);
-//				File destFile = new File(uploadDirectory, fileName);
+				File destFile = new File(uploadDirectory, fileName);
 
 				FileInputStream inputStream = new FileInputStream(upload);
 				FileOutputStream outputStream = new FileOutputStream(destFile);
@@ -84,10 +101,4 @@ public class UploadAction extends ActionSupport {
 			return "VIEW";
 		}
 	}
-	/*
-	 * public String getFileName() { return fileName; }
-	 * 
-	 * public void setFileName(String fileName) { this.fileName = fileName; }
-	 */
-
 }
